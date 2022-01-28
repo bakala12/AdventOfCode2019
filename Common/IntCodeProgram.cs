@@ -8,13 +8,19 @@ namespace Common
     public class IntCodeProgram
     {
         private readonly OpCodes opCodes = new OpCodes();
-        private InputStream inputStream;
-        private readonly OutputStream outputStream;
+        private IInputStream inputStream;
+        private readonly IOutputStream outputStream;
 
         public IntCodeProgram()
         {
             inputStream = new InputStream(new int[0]);
             outputStream = new OutputStream();
+        }
+
+        public IntCodeProgram(IInputStream inputStream, IOutputStream outputStream)
+        {
+            this.inputStream = inputStream;
+            this.outputStream = outputStream;
         }
 
         public void LoadInput(IEnumerable<int> input)
