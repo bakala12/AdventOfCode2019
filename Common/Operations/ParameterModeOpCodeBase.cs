@@ -1,10 +1,10 @@
 namespace Common.Operations
 {
-    public abstract class ParameterModeOpCodeBase : OpCode
+    public abstract class ParameterModeOpCodeBase : ParameterOnlyOpCode
     {
         public abstract int ParameterCount { get; }
 
-        public override int Execute(int[] data, int position, int parameterModes)
+        protected override int Execute(int[] data, int position, int parameterModes)
         {
             var parameters = new Parameter[ParameterCount];
             for(int p = 0; p < ParameterCount; p++)

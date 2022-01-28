@@ -1,9 +1,9 @@
 namespace Common.Operations
 {
-    public sealed class ExitOpCode : OpCode
+    public sealed class ExitOpCode : ParameterOnlyOpCode
     {
         public override int Code => 99;
         
-        public override int Execute(int[] data, int position, int parameterModes) => int.MaxValue;
+        protected override int Execute(int[] data, int position, int parameterModes) => int.MaxValue;
     }
 }

@@ -10,6 +10,8 @@ namespace Common.Operations
             _opcodes[1] = new AdditionOpCode();
             _opcodes[2] = new MultiplicationOpCode();
             _opcodes[99] = new ExitOpCode();
+            _opcodes[3] = new InputOpCode();
+            _opcodes[4] = new OutputOpCode();
         }
 
         internal OpCode this[int code] => _opcodes[code];
