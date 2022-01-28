@@ -2,14 +2,14 @@ using Common.Streams;
 
 namespace Common.Operations
 {
-    public sealed class InputOpCode : OpCode
+    public sealed class InputOpCode : InputOutputOpCodeBase
     {
         public override int Code => 3;
+        public override int ParameterCount => 1;
 
-        public override int Execute(int[] data, int position, int parameterModes, IInputStream inputStream, IOutputStream outputStream)
+        public override void ExecuteWithInput(int[] data, int position, Parameter[] parameters, IInputStream inputStream)
         {
-            data[data[position+1]] = inputStream.Read();
-            return position + 2;
+            data[parameters[0].Value] = inputStream.Read();
         }
     }
 }

@@ -12,6 +12,10 @@ namespace Common.Operations
             _opcodes[99] = new ExitOpCode();
             _opcodes[3] = new InputOpCode();
             _opcodes[4] = new OutputOpCode();
+            _opcodes[5] = new JumpIfTrueOpCode();
+            _opcodes[6] = new JumpIfFalseOpCode();
+            _opcodes[7] = new LessThanOpCode();
+            _opcodes[8] = new EqualsOpCode();
         }
 
         internal OpCode this[int code] => _opcodes[code];
