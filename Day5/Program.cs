@@ -18,7 +18,7 @@ namespace Day5
         private static void Part1(int[] data)
         {
             var program = new IntCodeProgram();
-            program.LoadInput(new int[] { 1 });
+            program.LoadInput(new long[] { 1 });
             program.Run(data);
             var res = program.GetOutput().LastOrDefault();
             Console.WriteLine(res);
@@ -27,7 +27,7 @@ namespace Day5
         private static void Part2(int[] data)
         {
             var program = new IntCodeProgram();
-            program.LoadInput(new int[] { 5 });
+            program.LoadInput(new long[] { 5 });
             program.Run(data);
             var res = program.GetOutput().LastOrDefault();
             Console.WriteLine(res);

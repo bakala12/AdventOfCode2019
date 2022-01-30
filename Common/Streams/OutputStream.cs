@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace Common.Streams
 {
-    public class OutputStream : IOutputStream, IEnumerable<int>
+    public class OutputStream : IOutputStream, IEnumerable<long>
     {
-        private readonly List<int> buffer = new List<int>();
+        private readonly List<long> buffer = new List<long>();
 
-        public void Write(int item)
+        public void Write(long item)
         {
             buffer.Add(item);
         }
 
-        public IEnumerator<int> GetEnumerator()
+        public IEnumerator<long> GetEnumerator()
         {
             return buffer.GetEnumerator();
         }

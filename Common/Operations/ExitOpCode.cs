@@ -4,6 +4,6 @@ namespace Common.Operations
     {
         public override int Code => 99;
         
-        protected override int Execute(int[] data, int position, int parameterModes) => int.MaxValue;
+        protected override IntProgramState Execute(long[] data, IntProgramState state, int parameterModes) => new IntProgramState(int.MaxValue, state.RelativeBase);
     }
 }

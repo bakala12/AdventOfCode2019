@@ -37,7 +37,7 @@ namespace Day7
 
         public int GetFinalSignal()
         {
-            return _stream.Read();
+            return (int)_stream.Read();
         }
     }
 }

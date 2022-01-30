@@ -27,20 +27,20 @@ namespace Day7
             _buffer.Add(value);
         }
 
-        public int Read()
+        public long Read()
         {
-            int v = _buffer.Take();
+            long v = _buffer.Take();
             return v;
         }
 
-        public void Write(int value)
+        public void Write(long value)
         {
-            _output?.ReceiveValue(value);
+            _output?.ReceiveValue((int)value);
         }
 
-        public IEnumerator<int> GetEnumerator()
+        public IEnumerator<long> GetEnumerator()
         {
-            return _buffer.GetConsumingEnumerable().GetEnumerator();
+            return _buffer.GetConsumingEnumerable().Select(x => (long)x).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

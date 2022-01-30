@@ -4,20 +4,20 @@ namespace Common.Operations
 {
     public abstract class InputOutputOpCodeBase : ParameterModeOpCodeBase
     {
-        public virtual void ExecuteWithInput(int[] data, int position, Parameter[] parameters, IInputStream inputStream) {}
+        public virtual void ExecuteWithInput(long[] data, IntProgramState state, Parameter[] parameters, IInputStream inputStream) {}
 
-        public virtual void ExecuteWithOutput(int[] data, int position, Parameter[] parameters, IOutputStream outputStream) {}
+        public virtual void ExecuteWithOutput(long[] data, IntProgramState state, Parameter[] parameters, IOutputStream outputStream) {}
 
-        protected override void ExecuteWithParameters(int[] data, int position, Parameter[] parameters)
+        protected override void ExecuteWithParameters(long[] data, IntProgramState state, Parameter[] parameters)
         {
         }
 
-        public override int Execute(int[] data, int position, int parameterModes, IInputStream inputStream, IOutputStream outputStream)
+        public override IntProgramState Execute(long[] data, IntProgramState state, int parameterModes, IInputStream inputStream, IOutputStream outputStream)
         {
-            var parameters = GetParameters(data, position, parameterModes);
-            ExecuteWithInput(data, position, parameters, inputStream);
-            ExecuteWithOutput(data, position, parameters, outputStream);
-            return NewPosition(data, position, parameters);
+            var parameters = GetParameters(data, state, parameterModes);
+            ExecuteWithInput(data, state, parameters, inputStream);
+            ExecuteWithOutput(data, state, parameters, outputStream);
+            return NewState(data, state, parameters);
         }
     }
 }

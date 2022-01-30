@@ -6,6 +6,6 @@ namespace Common.Operations
     {
         public abstract int Code { get; }
 
-        public abstract int Execute(int[] data, int position, int parameterModes, IInputStream inputStream, IOutputStream outputStream);
+        public abstract IntProgramState Execute(long[] data, IntProgramState state, int parameterModes, IInputStream inputStream, IOutputStream outputStream);
     }
 }

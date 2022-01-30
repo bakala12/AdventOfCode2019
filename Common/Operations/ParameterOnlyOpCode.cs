@@ -4,11 +4,11 @@ namespace Common.Operations
 {
     public abstract class ParameterOnlyOpCode : OpCode
     {
-        public override int Execute(int[] data, int position, int parameterModes, IInputStream inputStream, IOutputStream outputStream)
+        public override IntProgramState Execute(long[] data, IntProgramState state, int parameterModes, IInputStream inputStream, IOutputStream outputStream)
         {
-            return Execute(data, position, parameterModes);
+            return Execute(data, state, parameterModes);
         }
 
-        protected abstract int Execute(int[] data, int position, int parameterModes);
+        protected abstract IntProgramState Execute(long[] data, IntProgramState state, int parameterModes);
     }
 }

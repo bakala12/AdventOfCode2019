@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace Common.Streams
 {
-    public interface IOutputStream : IEnumerable<int>
+    public interface IOutputStream : IEnumerable<long>
     {
-        void Write(int output);
+        void Write(long output);
     }
 }

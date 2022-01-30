@@ -13,7 +13,7 @@ namespace Common
 
         public IntCodeProgram()
         {
-            inputStream = new InputStream(new int[0]);
+            inputStream = new InputStream(new long[0]);
             outputStream = new OutputStream();
         }
 
@@ -23,27 +23,37 @@ namespace Common
             this.outputStream = outputStream;
         }
 
-        public void LoadInput(IEnumerable<int> input)
+        public void LoadInput(IEnumerable<long> input)
         {
             inputStream = new InputStream(input);
         }
 
-        public IEnumerable<int> GetOutput()
+        public IEnumerable<long> GetOutput()
         {
             return outputStream;
         }
 
-        public void Run(int[] data)
+        public long Run(long[] data, Func<long[], long>? valSelector = null)
         {
-            int pos = 0;
-            while(pos < data.Length)
+            var state = new IntProgramState(0,0);
+            while(state.Position < data.Length)
             {
-                var d = data[pos];
-                var opCode = opCodes[d % 100];
+                var d = data[state.Position];
+                var opCode = opCodes[(int)(d % 100)];
                 if(opCode == null)
                     throw new InvalidOperationException("Unknown code procedure");
-                pos = opCode.Execute(data, pos, d / 100, inputStream, outputStream);
+                state = opCode.Execute(data, state, (int)(d / 100), inputStream, outputStream);
             }
+            if(valSelector != null)
+                return valSelector(data);
+            return default;
+        }
+
+        public long Run(int[] data, Func<long[], long>? valSelector = null)
+        {
+            var dataEx = new long[data.Length];
+            Array.Copy(data, dataEx, data.Length);
+            return Run(dataEx, valSelector);
         }
     }
 }

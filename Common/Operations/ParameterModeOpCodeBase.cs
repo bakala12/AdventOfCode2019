@@ -4,25 +4,25 @@ namespace Common.Operations
     {
         public abstract int ParameterCount { get; }
 
-        protected override int Execute(int[] data, int position, int parameterModes)
+        protected override IntProgramState Execute(long[] data, IntProgramState state, int parameterModes)
         {
-            var parameters = GetParameters(data, position, parameterModes);
-            ExecuteWithParameters(data, position, parameters);
-            return NewPosition(data, position, parameters);
+            var parameters = GetParameters(data, state, parameterModes);
+            ExecuteWithParameters(data, state, parameters);
+            return NewState(data, state, parameters);
         }
 
-        protected abstract void ExecuteWithParameters(int[] data, int position, Parameter[] parameters);
+        protected abstract void ExecuteWithParameters(long[] data, IntProgramState state, Parameter[] parameters);
 
-        protected virtual int NewPosition(int[] data, int position, Parameter[] parameters) => position + ParameterCount + 1;
+        protected virtual IntProgramState NewState(long[] data, IntProgramState state, Parameter[] parameters) => new IntProgramState(state.Position + ParameterCount + 1, state.RelativeBase);
 
-        public readonly record struct Parameter(int Value, int Mode);
+        public readonly record struct Parameter(long Value, int Mode);
 
-        protected virtual Parameter[] GetParameters(int[] data, int position, int parameterModes)
+        protected virtual Parameter[] GetParameters(long[] data, IntProgramState state, int parameterModes)
         {
             var parameters = new Parameter[ParameterCount];
             for(int p = 0; p < ParameterCount; p++)
             {
-                parameters[p] = new Parameter(data[position+p+1], parameterModes % 10);
+                parameters[p] = new Parameter(data[state.Position+p+1], parameterModes % 10);
                 parameterModes /= 10;
             }
             return parameters;

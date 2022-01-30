@@ -19,11 +19,11 @@ namespace Day7
             for(int i = 0; i < _count; i++)
             {
                 var computer = new IntCodeProgram();
-                computer.LoadInput(new int[] { phaseSettings[i], signal});
+                computer.LoadInput(new long[] { phaseSettings[i], signal});
                 int[] programCopy = new int[_program.Length];
                 Array.Copy(_program, programCopy, _program.Length);
                 computer.Run(programCopy);
-                signal = computer.GetOutput().LastOrDefault();
+                signal = (int)computer.GetOutput().LastOrDefault();
             }
             return signal;
         }

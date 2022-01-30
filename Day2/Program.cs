@@ -22,8 +22,8 @@ namespace Day2
             Array.Copy(data, numbers, data.Length);
             numbers[1] = 12;
             numbers[2] = 2;
-            program.Run(numbers);
-            Console.WriteLine(numbers[0]);
+            var res = program.Run(numbers, d => d[0]);
+            Console.WriteLine(res);
         }
 
         private static void Part2(int[] data)
@@ -36,8 +36,8 @@ namespace Day2
                     Array.Copy(data, numbers, data.Length);
                     numbers[1] = noun;
                     numbers[2] = verb;
-                    program.Run(numbers);
-                    if(numbers[0] == 19690720)
+                    var res = program.Run(numbers, d => d[0]);
+                    if(res == 19690720)
                     {
                         Console.WriteLine(100*noun + verb);
                         return;
