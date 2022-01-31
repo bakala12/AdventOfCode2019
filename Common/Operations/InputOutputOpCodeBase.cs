@@ -2,13 +2,13 @@ using Common.Streams;
 
 namespace Common.Operations
 {
-    public abstract class InputOutputOpCodeBase : ParameterModeOpCodeBase
+    public abstract class InputOutputOpCodeBase : WriteParameterModeOpCodeBase
     {
-        public virtual void ExecuteWithInput(long[] data, IntProgramState state, Parameter[] parameters, IInputStream inputStream) {}
+        public virtual void ExecuteWithInput(long[] data, IntProgramState state, long[] parameters, IInputStream inputStream) {}
 
-        public virtual void ExecuteWithOutput(long[] data, IntProgramState state, Parameter[] parameters, IOutputStream outputStream) {}
+        public virtual void ExecuteWithOutput(long[] data, IntProgramState state, long[] parameters, IOutputStream outputStream) {}
 
-        protected override void ExecuteWithParameters(long[] data, IntProgramState state, Parameter[] parameters)
+        protected override void ExecuteWithParameters(long[] data, IntProgramState state, long[] parameters)
         {
         }
 

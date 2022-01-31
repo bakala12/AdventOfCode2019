@@ -10,12 +10,17 @@ namespace Day9
         static void Main(string[] args)
         {
             var data = File.ReadAllText("input.txt").Split(',').Select(long.Parse).ToArray();
-            Part1(data);
+            Run(data, 1);
+            Run(data, 2);
         }
 
-        private static void Part1(long[] data)
+        private static void Run(long[] data, int input)
         {
-
+            var program = new IntCodeProgram();
+            program.LoadInput(new long[] { input });
+            program.Run(data, capacity: 100000000);
+            var output = program.GetOutput();
+            Console.WriteLine(output.Single());
         }
     }
 }

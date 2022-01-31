@@ -16,6 +16,7 @@ namespace Common.Operations
             _opcodes[6] = new JumpIfFalseOpCode();
             _opcodes[7] = new LessThanOpCode();
             _opcodes[8] = new EqualsOpCode();
+            _opcodes[9] = new RelativeBaseMoveOpCode();
         }
 
         internal OpCode this[int code] => _opcodes[code];

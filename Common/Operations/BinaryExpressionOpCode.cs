@@ -1,6 +1,6 @@
 namespace Common.Operations
 {
-    public abstract class BinaryExpressionOpCode : ParameterModeOpCodeBase
+    public abstract class BinaryExpressionOpCode : WriteParameterModeOpCodeBase
     {
         private readonly int _code;
         private readonly Func<long,long,long> _expression;
@@ -14,11 +14,9 @@ namespace Common.Operations
             _expression = expression;
         }
 
-        protected override void ExecuteWithParameters(long[] data, IntProgramState position, Parameter[] parameters)
+        protected override void ExecuteWithParameters(long[] data, IntProgramState state, long[] parameters)
         {
-            var arg1 = parameters[0].Mode == 0 ? data[parameters[0].Value] : parameters[0].Value;
-            var arg2 = parameters[1].Mode == 0 ? data[parameters[1].Value] : parameters[1].Value;
-            data[parameters[2].Value] = _expression(arg1, arg2);
+            data[parameters[2]] = _expression(parameters[0], parameters[1]);
         }
     }
 }

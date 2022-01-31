@@ -11,16 +11,14 @@ namespace Common.Operations
             _jumpCondition = jumpCondition;
         }
 
-        protected override void ExecuteWithParameters(long[] data, IntProgramState state, Parameter[] parameters)
+        protected override void ExecuteWithParameters(long[] data, IntProgramState state, long[] parameters)
         {
         }
 
-        protected override IntProgramState NewState(long[] data, IntProgramState state, Parameter[] parameters)
+        protected override IntProgramState NewState(long[] data, IntProgramState state, long[] parameters)
         {
-            var arg1 = parameters[0].Mode == 0 ? data[parameters[0].Value] : parameters[0].Value;
-            var arg2 = parameters[1].Mode == 0 ? data[parameters[1].Value] : parameters[1].Value;
-            if(_jumpCondition(arg1))
-                return new IntProgramState((int)arg2, state.RelativeBase);
+            if(_jumpCondition(parameters[0]))
+                return new IntProgramState((int)parameters[1], state.RelativeBase);
             return base.NewState(data, state, parameters);
         }
     }

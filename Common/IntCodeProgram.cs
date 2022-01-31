@@ -33,8 +33,14 @@ namespace Common
             return outputStream;
         }
 
-        public long Run(long[] data, Func<long[], long>? valSelector = null)
+        public long Run(long[] data, Func<long[], long>? valSelector = null, int? capacity = null)
         {
+            if(capacity.HasValue && capacity.Value > data.Length)
+            {
+                var temp = new long[capacity.Value];
+                Array.Copy(data, temp, data.Length);
+                data = temp;
+            }
             var state = new IntProgramState(0,0);
             while(state.Position < data.Length)
             {

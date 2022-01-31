@@ -7,9 +7,9 @@ namespace Common.Operations
         public override int Code => 3;
         public override int ParameterCount => 1;
 
-        public override void ExecuteWithInput(long[] data, IntProgramState state, Parameter[] parameters, IInputStream inputStream)
+        public override void ExecuteWithInput(long[] data, IntProgramState state, long[] parameters, IInputStream inputStream)
         {
-            data[parameters[0].Value] = inputStream.Read();
+            data[parameters[0]] = inputStream.Read();
         }
     }
 }
