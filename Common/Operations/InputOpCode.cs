@@ -9,9 +9,7 @@ namespace Common.Operations
 
         public override void ExecuteWithInput(long[] data, IntProgramState state, long[] parameters, IInputStream inputStream)
         {
-            Console.WriteLine("expected input...");
             data[parameters[0]] = inputStream.Read();
-            Console.WriteLine("Input read");
         }
     }
 }
