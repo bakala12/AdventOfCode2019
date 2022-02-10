@@ -36,6 +36,6 @@ namespace Common
             return 99;
         }
 
-        public long ExecuteTilOutput(long input) => ExecuteTilOutput(new InputStream(new long[] { input }));
+        public long ExecuteTilOutput(params long[] input) => ExecuteTilOutput(new InputStream(input));
     }
 }
