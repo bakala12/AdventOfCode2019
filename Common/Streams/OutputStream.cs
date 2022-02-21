@@ -21,5 +21,10 @@ namespace Common.Streams
         {
             return GetEnumerator();
         }
+
+        public void Clear()
+        {
+            buffer.Clear();
+        }
     }
 }

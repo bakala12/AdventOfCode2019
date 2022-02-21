@@ -37,5 +37,35 @@ namespace Common
         }
 
         public long ExecuteTilOutput(params long[] input) => ExecuteTilOutput(new InputStream(input));
+
+        public void ExecutWithInputTilInput(IOutputStream outputStream, params long[] inputs)
+        {
+            if(IsHalted)
+                return;
+            IsWatingForInput = false;
+            int pos = 0;
+            IInputStream inputStream = new InputStream(inputs);
+            while(_state.Position < _data.Length)
+            {
+                var d = _data[_state.Position];
+                var opCode = opCodes[(int)(d % 100)];
+                if(opCode == null)
+                    throw new InvalidOperationException("Unknown code procedure");
+                if(opCode.Code == 3 && pos++ >= inputs.Length)
+                {
+                    IsWatingForInput = true;
+                    return;
+                }
+                _state = opCode.Execute(_data, _state, (int)(d / 100), inputStream, outputStream);
+                if(opCode.Code == 99)
+                {
+                    IsHalted = true;
+                    return;
+                }
+            }
+        }
+
+        public bool IsHalted { get; private set; } = false;
+        public bool IsWatingForInput { get; private set; } = false;
     }
 }
